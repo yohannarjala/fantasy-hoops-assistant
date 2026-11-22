@@ -1,0 +1,5 @@
+espn_api
+python-dotenv
+pandas
+pyyaml
+pytest
