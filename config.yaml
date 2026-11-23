@@ -1,0 +1,4 @@
+scoring_mode: categories
+min_gain: 1.0
+max_suggestions: 3
+protected_players: ["Kevin Durant", "Donovan Clingan", "Zion Williamson", "Kyrie Irving"]
