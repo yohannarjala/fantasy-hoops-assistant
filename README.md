@@ -20,3 +20,9 @@ Tech Stack:
   - Tools: espn_api, pandas, pytest from Python; and date, curl, jq from Bash
   - Storage: settings stores in .env, each run of the code stored in a .md markdown
   - External Source: pulling data from ESPN Fantasy via fantasy.espn.com (unofficial) API
+
+Scheduling through Windows Task Scheduler:
+- Trigger: daily at 9:00 AM
+- Program: wsl.exe
+- Arguments: -e /home/<user>/fantasy-hoops-assistant/run_daily.sh
+- Setting: run as soon as possible after a missed start
