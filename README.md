@@ -21,7 +21,7 @@ Tech Stack:
   - Storage: settings stores in .env, each run of the code stored in a .md markdown
   - External Source: pulling data from ESPN Fantasy via fantasy.espn.com (unofficial) API
 
-Scheduling through Windows Task Scheduler:
+Scheduling through Windows Task Scheduler (option instead of bash scheduler):
 - Trigger: daily at 9:00 AM
 - Program: wsl.exe
 - Arguments: -e /home/<user>/fantasy-hoops-assistant/run_daily.sh
