@@ -6,12 +6,25 @@ from espn_api.basketball import League
 
 def get_league():
     load_dotenv()
-    return League(
-        league_id=int(os.environ["ESPN_LEAGUE_ID"]),
-        year=int(os.environ["ESPN_YEAR"]),
-        espn_s2=os.environ.get("ESPN_S2"),
-        swid=os.environ.get("ESPN_SWID"),
-    )
+    missing = [k for k in ("ESPN_LEAGUE_ID", "ESPN_YEAR", "ESPN_TEAM_ID") if not os.environ.get(k)]
+    if missing:
+        raise SystemExit(f"Missing settings in .env: {', '.join(missing)}")
+    try:
+        return League(
+            league_id=int(os.environ["ESPN_LEAGUE_ID"]),
+            year=int(os.environ["ESPN_YEAR"]),
+            espn_s2=os.environ.get("ESPN_S2"),
+            swid=os.environ.get("ESPN_SWID"),
+        )
+    except Exception as e:
+        kind = type(e).__name__
+        if kind == "ESPNAccessDenied":
+            raise SystemExit("ESPN denied access. Your espn_s2 and SWID cookies have probably "
+                             "expired. Log in to ESPN, copy fresh values into .env, and rerun.")
+        if kind == "ESPNInvalidLeague":
+            raise SystemExit("ESPN could not find that league. Check ESPN_LEAGUE_ID and "
+                             "ESPN_YEAR in .env.")
+        raise
 
 
 def get_my_team(league):
