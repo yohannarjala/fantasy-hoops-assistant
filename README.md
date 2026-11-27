@@ -21,6 +21,15 @@ Tech Stack:
   - Storage: settings stores in .env, each run of the code stored in a .md markdown
   - External Source: pulling data from ESPN Fantasy via fantasy.espn.com (unofficial) API
 
+How it works:
+  - Bash/cron scheduler runs 'run_daily.sh' which calls 'src/main.py'
+  - It fetches league data through the 'espn-api', scores every player, builds a lineup, and add/drop advice
+  - Writes a report for each day
+
+Scheduling with bash/cron:
+  - cron: '0 9 * * * /bin/bash /home/<user>/fantasy-hoops-assistant/run_daily.sh >> /home/<user>/fantasy-hoops-assistant/logs/cron.log 2>&1'
+  - only runs while WSL is running
+
 Scheduling through Windows Task Scheduler (option instead of bash scheduler):
 - Trigger: daily at 9:00 AM
 - Program: wsl.exe
